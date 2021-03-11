@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            width: 100%;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='app'>
+        <p v-for='item in imgs' :key=item>
+            <img v-lazyload='item'>
+        </p>
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+    Vue.directive('lazyload', {
+        bind: function (el, binging) {
+            let lazyLoadObser = new IntersectionObserver((entries, observer) => {
+                // 遍历每一项元素
+                entries.forEach((entry, index) => {
+                    lazyImg = entry.target
+                    // 1说明在可视范围,否则为0
+                    if (entry.intersectionRatio > 0) {
+
+                        lazyImg.src = binging.value
+                        // 卸载监听
+                        lazyLoadObser.unobserve(lazyImg)
+                    }
+                })
+
+            })
+
+            lazyLoadObser.observe(el)
+        }
+
+        })
+    var app = new Vue({
+        el: "#app",
+        data: {
+            imgs: ["https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4015003442,2734192448&fm=15&gp=0.jpg",
+                "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4015003442,2734192448&fm=15&gp=0.jpg",
+                "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4015003442,2734192448&fm=15&gp=0.jpg",
+                "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4015003442,2734192448&fm=15&gp=0.jpg",
+                "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4015003442,2734192448&fm=15&gp=0.jpg",
+                "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4015003442,2734192448&fm=15&gp=0.jpg",
+                "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4015003442,2734192448&fm=15&gp=0.jpg"
+
+            ]
+        }
+    })
+</script>
+
+</html>

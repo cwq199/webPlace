@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<div></div>
+<body>
+    <script>
+        for(key in  document){
+            // Object对象使用toString()返回[onject Object],其他则需要用call,apply才能返回证券类型
+            if(Object.prototype.toString(key)=='[object Object]'){
+                console.log(key+":"+typeof document[key])
+            }
+            
+        }
+    </script>
+</body>
+</html>

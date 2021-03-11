@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 01、盒模型 content+padding+border+margin
+        IE模型：width/height=content+padding+border   box-sizing:border-box
+        标准模型：width/height=content                  box-sizing:content-box
+    -->
+    <!--02、获取宽高
+        dom.getBoundingClientRect().width/height  :获取渲染后的宽高
+        dom.offsetWidth/offsetHeight: 包括高度（宽度）、内边距和边框，不包括外边距。 
+    -->
+    <!-- 
+        03、BFC   块级格式化上下文 在一个环境下布局不会影响其他布局
+            BFC元素垂直方向的边距会发生重叠。属于不同BFC外边距不会发生重叠
+            BFC的区域不会与浮动元素的布局重叠。
+            BFC元素是一个独立的容器，外面的元素不会影响里面的元素。里面的元素也不会影响外面的元素。
+            计算BFC高度的时候，浮动元素也会参与计算(清除浮动)
+        如何创建BFC
+        1、overflow不为visible;
+        2、float的值不为none；
+        3、position的值不为static或relative；
+        4、display属性为inline-blocks,table,table-cell,table-caption,flex,inline-flex;
+
+     -->
+</body>
+</html>

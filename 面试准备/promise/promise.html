@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        
+        // 定时器回调
+        setTimeout(() => { // 异步回调，会放入队列中将来执行
+            console.log('timeout callback()')
+        }, 0)
+        console.log('setTimeout()之后')
+// “setTimeout()之后”
+// “timeout callback()”
+    </script>
+</body>
+
+</html>

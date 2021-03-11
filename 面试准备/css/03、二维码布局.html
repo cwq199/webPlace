@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二维码布局</title>
+    <style>
+        body{
+            margin: 0px;
+            height: 0px;
+        }
+        .box1{
+            width: 100%;
+            height: 500px;
+            background-color: thistle;
+        }
+        .box2{
+            width: 100%;
+            height: 500px;
+            background-color:blue;
+        }
+        .box3{
+            position: fixed;
+            width: 162px;
+            height: 210px;
+            background-color: white;
+            bottom: 150px;
+            left: -81px;
+        }
+        .box3:hover{
+            left:0
+        }
+        .box4{
+            margin: 8px;
+
+            padding: 20px 15px 8px;
+            margin: 8px;
+            border: 2px solid #FFEDF1;
+        }
+         .box4 img{
+            /* position: absolute; */
+            height:100% ;
+            width:100% ;
+            display: block;
+        }
+        .box5 {
+            text-align: center;
+            font-size:14px ;
+            color: #666666;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="box3">
+        <div class="box4">
+            <img src="https://cdn.pinduoduo.com/upload/e48dac21-db3b-4801-b047-6f14d0805614.png.slim.png" alt="">
+            <div class="box5">
+                    <span>扫码下载</span>
+                    <span>APP专享优惠</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

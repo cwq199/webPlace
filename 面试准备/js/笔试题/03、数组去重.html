@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+ /* 
+    找出一个网页里所有不是重复的标签
+*/
+// 获取所有元素 返回一个类数组
+ var arr = document.querySelectorAll("*")
+console.log([...new Set([...arr].map(v=>v.tagName))])
+</script>
+</body>
+</html>

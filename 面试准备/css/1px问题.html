@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=false">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+          background-color: white;
+          position: relative;
+        }
+        .border_1px:before{
+            content: "";
+            position: absolute;
+            top:0;
+            height: 1px;
+            width: 100%;
+            background-color: #000;
+            transform-origin: 50% 0%;
+        }
+        @media only screen and (-webkit-min-device-pixel-ratio:2){
+            .border_1px:before{
+                transform:scaleY(0.5)
+            }
+        }
+        @media only screen and (-webkit-min-device-pixel-ratio:3){
+            .border_1px:before{
+                transform:scaleY(0.33)
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="border_1px"></div>
+    </div>
+ 
+</body>
+</html>

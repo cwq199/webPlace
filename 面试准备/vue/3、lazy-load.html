@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-lazy</title>
+    <style>
+        body{
+            margin: 0px;
+            padding: 0px;
+        }
+        div{
+            display: flex;
+            flex-direction: column;
+        }
+        img{
+            width: 100%;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <img src=""
+            data-src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4015003442,2734192448&fm=15&gp=0.jpg"
+            alt="" srcset="">
+        <img src=""
+            data-src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3791918726,2864900975&fm=26&gp=0.jpg"
+            alt="" srcset="">
+        <img src=""
+            data-src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3791918726,2864900975&fm=26&gp=0.jpg"
+            alt="" srcset="">
+        <img src=""
+            data-src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3791918726,2864900975&fm=26&gp=0.jpg"
+            alt="" srcset="">
+        <img src=""
+            data-src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3791918726,2864900975&fm=26&gp=0.jpg"
+            alt="" srcset="">
+        <img src=""
+            data-src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3791918726,2864900975&fm=26&gp=0.jpg"
+            alt="" srcset="">
+        <img src=""
+            data-src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3791918726,2864900975&fm=26&gp=0.jpg"
+            alt="" srcset="">
+     
+    </div>
+
+    <script>
+        // 方法一：使用节流函数,弊端：1、每次触发scroll都会触发 2、拉倒最底层对每个图片都成立，刷新时所有图片都会被加载
+     function throttle(fn,wait){
+         let timer = null
+         return function(...args){
+             if(!timer){
+                 timer = setTimeout(()=>{
+                    timer = null
+                    fn.apply(this,args)
+                 },wait)
+             }
+         }
+     }
+
+    //  const imgs = [...document.getElementsByTagName('img')]
+    //  let n = 0
+    //  lazyLoad()
+    //  function lazyLoad(){
+    //      var innerHeight = window.innerHeight
+    //      var scrollTop = document.documentElement.scrollTop
+    //      console.log(scrollTop)
+    //      for(let i=n;i<imgs.length;i++){
+    //          console.log(i+"、"+imgs[i].offsetTop+ ":"+(innerHeight+scrollTop))
+    //          if(imgs[i].offsetTop<innerHeight+scrollTop){
+    //             //  console.log(i)
+    //              imgs[i].src =  imgs[i].getAttribute('data-src')
+    //              n=i+1
+    //          }
+    //      }
+    //  }
+    //  window.addEventListener('scroll',throttle(lazyLoad,200))
+    // 方法二
+    const imgs  = [...document.getElementsByTagName('img')]
+    if(IntersectionObserver){
+        let lazyLoadObser = new IntersectionObserver((entries,observer)=>{
+            // 遍历每一项元素
+            entries.forEach((entry,index)=>{
+                lazyImg = entry.target
+                // 1说明在可视范围,否则为0
+                if(entry.intersectionRatio>0){
+                    console.log(entry)
+                    lazyImg.src = lazyImg.getAttribute("data-src")
+                    // 卸载监听
+                    lazyLoadObser.unobserve(lazyImg)
+                }
+            })
+
+        })
+        for(let i=0;i<imgs.length;i++){
+            // 监听每-项元素
+          lazyLoadObser.observe(imgs[i])
+        }
+    }
+    </script>
+</body>
+
+</html>
