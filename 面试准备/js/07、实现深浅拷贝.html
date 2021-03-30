@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实现深浅拷贝</title>
+</head>
+
+<body>
+    <script>
+        //浅拷贝
+        /* 
+            assign,push,concat
+        */
+        /*      var obj = { age: '12' }
+             var newObj = obj */
+        // 深拷贝
+        /* 
+            JSON.parse
+                会忽略 undefined
+                会忽略 symbol
+                不能序列化函数
+                不能解决循环引用的对象
+        */
+        var arr1 = ['red', 'green']
+        var arrw2 = JSON.parse(JSON.stringify(arr1))
+        /* 
+            递归实现
+        */
+        function deepClone(obj) {
+            //判断参数是不是一个对象
+            let objClone = obj instanceof Object ? [] : {};
+            if (obj && typeof obj === "object") {
+                for (key in obj) {
+                    if (obj.hasOwnProperty(key)) {
+                        //判断ojb子元素是否为对象，如果是，递归复制
+                        if (obj[key] && typeof obj[key] === "object") {
+                            objClone[key] = deepClone(obj[key]);
+                        } else {
+                            //如果不是，简单复制
+                            objClone[key] = obj[key];
+                        }
+                    }
+                }
+            }
+            return objClone;
+        }
+
+        /* 
+         */
+        function clone(Obj) {
+            var buf;
+            if (Obj instanceof Array) {
+                buf = [];  // 创建一个空的数组
+                var i = Obj.length;
+                while (i--) {
+                    buf[i] = clone(Obj[i]);
+                }
+                return buf;
+            } else if (Obj instanceof Object) {
+                buf = {};  // 创建一个空对象
+                for (var k in Obj) {  // 为这个对象添加新的属性
+                    buf[k] = clone(Obj[k]);
+                }
+                return buf;
+            } else {
+                return Obj;
+            }
+        }
+        /* 
+            如果我们要拷贝的对象非常庞大时，使用 Map会对内存造成非常大的额外消耗，
+            而且我们需要手动清除 Map的属性才能释放这块内存，而 WeakMap会帮我们巧妙化解这个问题。
+         */
+        function deepclone(target, map = new WeekMap()) {
+            if(typeof target ==='object'){
+                let cloneTarget =Array.isArray(target)?[]:{}
+                if(map.has(target)){
+                    return target
+                }
+                map.set(target,cloneTarget)
+                for(const key in target){
+                    cloneTarget[key] =deepclone(target[key],map)
+                }
+                return cloneTarget
+            }else{
+                return target
+            }
+        };
+
+        var a = {
+            x: 1,
+            y: 2
+        };
+
+
+        b = deepClone(a);
+        a.x = 3
+        console.log(a);
+        console.log(b);
+    </script>
+</body>
+
+</html>

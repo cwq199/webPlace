@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 速度非常惊人，主要得益于浏览器的内部优化。一个著名的例子字符串拼接，
+        直接相加比用Array做成的StringBuffer还快。base2类库使用这种实现 */
+          String.prototype.trim = function () {
+            return this.replace(/^\s\s*/, '').replace(/\s\s*$/, '')
+        }
+        /*
+            速度略慢 
+         */
+        String.prototype.trim = function () {
+            return this.replace(/^\s+/, '').replace(/\s+$/, '');
+        } 
+
+        /* <0.5ms */
+        String.prototype.trim = function () {
+            var str = this,
+                str = str.replace(/^\s+/, '');
+            for (var i = str.length - 1; i >= 0; i--) {
+                if (/\S/.test(str.charAt(i))) {
+                    str = str.substring(0, i + 1);
+                    break;
+                }
+            }
+            return str;
+        }
+
+        /*  <0.5ms*/
+        String.prototype.trim = function () {
+            var str = this,
+                str = str.replace(/^\s\s*/, ''),
+                ws = /\s/,
+                i = str.length;
+            while (ws.test(str.charAt(--i)));
+            return str.slice(0, i + 1);
+        }
+
+    </script>
+</body>
+
+</html>

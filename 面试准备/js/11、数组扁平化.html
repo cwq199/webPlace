@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        数组扁平化是将输入一个嵌套数组返回一个新的一维数组
+     -->
+    <script>
+        /* 基础版 */
+        function flat(arr) {
+            let arrResult = []
+            arr.forEach(item => {
+                if (Array.isArray(item)) {
+                    arrResult = arrResult.concat(arguments.callee(item))  //递归
+                    //或者
+                    //arrResult.push(...arguments.callee(item))
+                } else {
+                    arrResult.push(item)
+                }
+            })
+            return arrResult
+        }
+
+        /* reduce 实现 */
+        function flat(arr) {
+            return arr.reduce((pre, cur) => {
+                return pre.concat(Array.isArray(cur) ? flat(cur) : cur)
+            }, [])//表示初始值
+        }
+
+        /* 添加去除空位 */
+        // reduce + 递归
+        Array.prototype.fakeFlat = function (num = 1) {
+            if (!Number(num) || Number(num) < 0) {
+                return this;
+            }
+            let arr = [].concat(this);
+            return num > 0
+                ? arr.reduce(
+                    (pre, cur) =>
+                        pre.concat(Array.isArray(cur) ? cur.fakeFlat(--num) : cur),
+                    []
+                )
+                : arr.slice();
+        };
+        const arr = [1, [3, 4], , ,];
+        arr.fakeFlat()
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "..\\..\\.."
+		},
+		{
+			"path": "..\\..\\..\\..\\VscodeWorkPlace"
+		},
+		{
+			"path": "..\\..\\..\\..\\学习\\笔记\\web笔记"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "webPlace"
+	}
+}

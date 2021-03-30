@@ -57,7 +57,7 @@ function curry(fn){
         // console.log(add(1, 2)(3));
         // console.log(add(1)(2, 3)); 
         // 注意箭头函数的使用
-        const curry = (fn, ...args) =>
+       var curry = (fn, ...args) =>
             args.length >= fn.length
                 ? fn(...args)
                 : (..._args) => curry(fn, ...args, ..._args)
@@ -74,7 +74,7 @@ function curry(fn){
         console.log(add(1)(2, 3));
 
         //    无限加长版
-        function argsSum(args) {
+ /*        function argsSum(args) {
             return args.reduce((pre, cur) => {
                 return pre + cur
             })
@@ -89,7 +89,7 @@ function curry(fn){
                 return sum1
             }
             return fn
-        }
+        } */
 
     </script>
 </body>
